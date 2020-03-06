@@ -1,0 +1,21 @@
+language: python
+python:
+  - "3.8"
+
+dist: xenial
+
+addons:
+  sonarcloud:
+    organization: "jhawk1196"
+    token: ${SONAR}
+
+before_install:
+  - pip install coverage
+
+script:
+  - coverage run -m unittest
+  - coverage report
+  - sonar-scanner
+
+after_success:
+  - coveralls
